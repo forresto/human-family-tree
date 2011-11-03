@@ -1,7 +1,9 @@
 void setup () {
-  
-size(800, 800);
+
+size(5000, 5000);
 background(0);
+
+float margin = 10;
 
 String csvData[] = loadStrings("HumanPopulation.csv");
 int dates[] = new int[csvData.length-1];
@@ -18,14 +20,14 @@ int dateRange = dates[dates.length-1] - dates[0];
 float popRange = populations[populations.length-1] - populations[0];
 
 float lastx3 = width/2;
-float lasty3 = 0;
+float lasty3 = margin;
 float lastx4 = width/2;
-float lasty4 = 0;
+float lasty4 = margin;
 
 // Axi
 stroke(255);
-line(width/2, 0, width/2, height);
-line(0, height-1, width, height-1);
+line(width/2, margin, width/2, height-margin);
+line(margin, height-margin, width-margin, height-margin);
 
 // Draw image
 noStroke();
@@ -38,15 +40,15 @@ for (int i=0; i<dates.length-1; i++) {
   float y1 = lasty3;
   float x2 = lastx4;
   float y2 = lasty4;
-  float x3 = width/2 + (population / popRange * width / 2);
-  float y3 = float(date - dates[0]) / dateRange * height;
+  float x3 = width/2 + ( population / popRange * (width-margin*2) / 2 );
+  float y3 = margin + ( float(date - dates[0]) / dateRange * (height-margin*2) );
   float x4 = width - x3;
   float y4 = y3;
   
-  lastx3 = x3;
-  lasty3 = y3;
-  lastx4 = x4;
-  lasty4 = y4;
+  lastx3 = x4;
+  lasty3 = y4;
+  lastx4 = x3;
+  lasty4 = y3;
   
   beginShape();
   vertex(x1,y1);
